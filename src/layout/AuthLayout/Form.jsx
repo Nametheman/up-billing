@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import styled from "styled-components";
-
+import { useNavigate } from "react-router-dom";
 
 const Form = () => {
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -30,6 +31,7 @@ const Form = () => {
     },
     onSubmit: (values) => {
       // handle form submission
+      navigate("/home");
     },
   });
 

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { HeadPane, SearchBox, ContentWrapper } from "../Home/Home";
 import { GrSearch } from "react-icons/gr";
 import Filter from "./Filter";
+import Table from "./Table";
 
 const Home = () => {
   return (
@@ -22,6 +23,7 @@ const Home = () => {
         <h3 className="pageName">UP BILLING REVENUE</h3>
         <TableWrapper>
           <Filter />
+          <Table />
         </TableWrapper>
       </ContentWrapper>
     </Container>
@@ -35,4 +37,6 @@ const Container = styled.section``;
 const TableWrapper = styled.div`
   background-color: #fff;
   border-radius: 13px;
+  padding: 20px;
+  margin-top: 30px;
 `;

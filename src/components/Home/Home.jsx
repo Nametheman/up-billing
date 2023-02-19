@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { GrSearch } from "react-icons/gr";
+import { BiLogOut } from "react-icons/bi";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import user from "../../assets/images/user.svg";
 import DatePicker from "react-datepicker";
@@ -8,6 +9,7 @@ import calendar from "../../assets/images/calendar.svg";
 import generateBtn from "../../assets/images/exportBtn.svg";
 import "react-datepicker/dist/react-datepicker.css";
 import Toast from "./Toast";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -15,6 +17,8 @@ const Home = () => {
 
   const [showSelectModal, setShowSelectModal] = useState(false);
   const [reportList, setReportList] = useState(false);
+
+  const [showLogout, setShowLogout] = useState(false);
 
   const showSelectModalHandler = () => {
     setShowSelectModal(true);
@@ -36,7 +40,12 @@ const Home = () => {
             placeholder="Search for existing reports "
           />
         </SearchBox>
-        <UserProfileWrapper>
+        <UserProfileWrapper
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            setShowLogout(!showLogout);
+          }}
+        >
           <div className="userAVI">
             <img src={user} alt="" />
           </div>
@@ -45,6 +54,14 @@ const Home = () => {
             <p style={{ color: "#00000080", fontSize: "12px" }}>UP BI</p>
           </div>
           <FaCaretDown size={13} />
+          {showLogout && (
+            <div className="logout">
+              <Link to="/login">
+                <BiLogOut />
+                <p>Logout</p>
+              </Link>
+            </div>
+          )}
         </UserProfileWrapper>
       </HeadPane>
       <ContentWrapper>
@@ -90,23 +107,23 @@ const Home = () => {
           <div className="timeRange">
             <p>Time Range:</p>
             <div className="rangeContainer">
-              <div className="range">
+              <Range>
                 <DatePicker
                   selected={startDate}
                   onChange={(date) => setStartDate(date)}
                   className="myInput"
                 />
                 <img src={calendar} alt="" />
-              </div>
+              </Range>
               <p>to</p>
-              <div className="range">
+              <Range>
                 <DatePicker
                   selected={endDate}
                   onChange={(date) => setEndDate(date)}
                   className="myInput"
                 />
                 <img src={calendar} alt="" />
-              </div>
+              </Range>
             </div>
           </div>
 
@@ -161,6 +178,23 @@ const UserProfileWrapper = styled.div`
   align-items: center;
   gap: 9px;
   margin-right: 20px;
+  position: relative;
+
+  .logout {
+    a {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      position: absolute;
+      right: 5px;
+      top: 50px;
+      background-color: #fff;
+      padding: 10px;
+      z-index: 2;
+      color: red;
+      text-decoration: none;
+    }
+  }
 
   .userAVI {
     img {
@@ -246,28 +280,6 @@ const Content1 = styled.div`
       align-items: center;
       justify-content: space-between;
       margin-top: 20px;
-
-      .range {
-        display: flex;
-        border: 1px solid #e1e2e5;
-        background-color: #fff;
-        width: 160px;
-        align-items: center;
-        justify-content: space-between;
-        padding: 5px 10px;
-        border-radius: 6px;
-        .myInput {
-          height: 30px;
-          width: 120px;
-          border: none;
-          outline: none;
-          cursor: pointer;
-          background: transparent;
-        }
-        img {
-          width: 15px;
-        }
-      }
     }
   }
 
@@ -285,4 +297,26 @@ const Content2 = styled.div`
   width: 100%;
   height: 400px;
   border-radius: 10px;
+`;
+
+export const Range = styled.div`
+  display: flex;
+  border: 1px solid #e1e2e5;
+  background-color: #fff;
+  width: 160px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+  border-radius: 6px;
+  .myInput {
+    height: 30px;
+    width: 120px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: transparent;
+  }
+  img {
+    width: 15px;
+  }
 `;
