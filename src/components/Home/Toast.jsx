@@ -42,9 +42,9 @@ const Container = styled.div`
     width: 350px;
     height: 100px;
     border-radius: 10px;
-    animation: slideDown 0.5s forwards;
+    animation: slideDown2 0.5s forwards;
 
-    @keyframes slideDown {
+    @keyframes slideDown2 {
       0% {
         /* transform: translateX(-100px); */
         top: -100px;

@@ -14,7 +14,7 @@ const Form = () => {
       const errors = {};
       console.log(errors);
       if (!formik.values.email) {
-        errors.email = "Required";
+        errors.email = "Email is required";
       } else if (
         !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i.test(
           formik.values.email
@@ -23,7 +23,7 @@ const Form = () => {
         errors.email = "Invalid email address";
       }
       if (!formik.values.password) {
-        errors.password = "Required";
+        errors.password = "Password is required";
       } else if (formik.values.password.length < 8) {
         errors.password = "Must be 8 characters or more";
       }
@@ -49,7 +49,7 @@ const Form = () => {
           onBlur={formik.handleBlur}
         />
         {formik.touched.email && formik.errors.email ? (
-          <div>{formik.errors.email}</div>
+          <div className="errorMessage">{formik.errors.email}</div>
         ) : null}
 
         <label htmlFor="password">Password</label>
@@ -66,7 +66,7 @@ const Form = () => {
         {/* </div> */}
 
         {formik.touched.password && formik.errors.password ? (
-          <div>{formik.errors.password}</div>
+          <div className="errorMessage">{formik.errors.password}</div>
         ) : null}
         <input type="submit" value="Sign In" className="submitBtn" />
       </form>
@@ -84,11 +84,13 @@ const Container = styled.div`
     justify-content: center;
     margin-top: 1rem;
 
+    @media only screen and (max-width: 400px) {
+    }
     input {
       width: 96%;
       height: 43px;
       padding-left: 18px;
-      margin-bottom: 20px;
+      margin-bottom: 6px;
       border: 1px solid #bdbdbdcc;
       border-radius: 5px;
 
@@ -101,7 +103,7 @@ const Container = styled.div`
       border-radius: 5px;
     }
     label {
-      margin-bottom: 10px;
+      margin: 10px 0;
     }
 
     .submitBtn {
@@ -110,6 +112,13 @@ const Container = styled.div`
       background-color: #ff993a;
       color: #fff;
       font-size: 16px;
+      margin-top: 20px;
+    }
+
+    .errorMessage {
+      color: red;
+      font-size: 13px;
+      margin-bottom: 10px;
     }
   }
 `;

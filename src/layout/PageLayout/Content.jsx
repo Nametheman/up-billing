@@ -10,4 +10,8 @@ export default Content;
 const Container = styled.section`
   background-color: #f5f5f5;
   width: calc(100% - 300px);
+
+  @media only screen and (max-width: 400px) {
+    width: 100%;
+  }
 `;

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { HeadPane, SearchBox, ContentWrapper } from "../Home/Home";
 import { GrSearch } from "react-icons/gr";
 import { FaLock } from "react-icons/fa";
+import cover from "../../assets/images/Cover.svg";
 
 const Home = () => {
   return (
@@ -32,6 +33,10 @@ const Home = () => {
           </div>
           <div className="settingsMain"></div>
         </SettingsWrapper>
+
+        <div>
+          <img src={cover} alt="cover" />
+        </div>
       </ContentWrapper>
     </Container>
   );

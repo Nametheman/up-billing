@@ -49,7 +49,7 @@ const Home = () => {
           <div className="userAVI">
             <img src={user} alt="" />
           </div>
-          <div>
+          <div className="loggedUserInfo">
             <p>John Doe</p>
             <p style={{ color: "#00000080", fontSize: "12px" }}>UP BI</p>
           </div>
@@ -115,7 +115,7 @@ const Home = () => {
                 />
                 <img src={calendar} alt="" />
               </Range>
-              <p>to</p>
+              <p className="toPPP">to</p>
               <Range>
                 <DatePicker
                   selected={endDate}
@@ -148,6 +148,12 @@ export const HeadPane = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media only screen and (max-width: 400px) {
+    width: 100vw;
+    gap: 10px;
+    padding: 10px;
+  }
 `;
 
 export const SearchBox = styled.div`
@@ -159,6 +165,10 @@ export const SearchBox = styled.div`
   border-radius: 6px;
   padding: 0 20px;
 
+  @media only screen and (max-width: 400px) {
+    width: 300px;
+  }
+
   input {
     width: 98%;
     height: 98%;
@@ -166,6 +176,9 @@ export const SearchBox = styled.div`
     outline: none;
     padding: 0 10px;
 
+    @media only screen and (max-width: 400px) {
+      width: 99%;
+    }
     &::placeholder {
       color: #00000080;
       font-size: 14px;
@@ -179,7 +192,14 @@ const UserProfileWrapper = styled.div`
   gap: 9px;
   margin-right: 20px;
   position: relative;
-
+  @media only screen and (max-width: 400px) {
+    margin-right: 0;
+  }
+  .loggedUserInfo {
+    @media only screen and (max-width: 400px) {
+      display: none;
+    }
+  }
   .logout {
     a {
       display: flex;
@@ -205,6 +225,12 @@ const UserProfileWrapper = styled.div`
 
 export const ContentWrapper = styled.div`
   padding: 20px 40px;
+
+  h3 {
+    @media only screen and (max-width: 400px) {
+      text-align: center;
+    }
+  }
 `;
 const Content1 = styled.div`
   margin: 20px 0;
@@ -213,9 +239,28 @@ const Content1 = styled.div`
   height: 400px;
   border-radius: 10px;
   padding: 50px;
+
+  @media only screen and (max-width: 400px) {
+    /* display: block;
+        justify-content: center;
+        width: 100%; */
+
+    padding: 20px 30px 30px;
+    font-size: 14px;
+    text-align: center;
+  }
   .idktbh {
     position: relative;
     width: 370px;
+
+    @media only screen and (max-width: 400px) {
+      display: flex;
+      justify-content: center;
+      width: 200px;
+      gap: 15px;
+      margin-left: 10%;
+    }
+
     .searchReport {
       margin-top: 16px;
       width: 360px;
@@ -240,6 +285,13 @@ const Content1 = styled.div`
       top: 50px;
       border-radius: 8px;
 
+      @media only screen and (max-width: 400px) {
+        /* display: block;
+        justify-content: center;
+        width: 100%; */
+        width: 200px;
+      }
+
       .selectRptHead {
         display: flex;
         align-items: center;
@@ -249,6 +301,13 @@ const Content1 = styled.div`
 
         p {
           color: #000000b2;
+
+          @media only screen and (max-width: 400px) {
+            /* display: block;
+        justify-content: center;
+        width: 100%; */
+            font-size: 13px;
+          }
         }
       }
 
@@ -263,6 +322,13 @@ const Content1 = styled.div`
           color: #000;
           transition: all 0.3s ease-in-out;
 
+          @media only screen and (max-width: 400px) {
+            /* display: block;
+        justify-content: center;
+        width: 100%; */
+            font-size: 13px;
+          }
+
           &:hover {
             background-color: #fff0d2;
             border-radius: 8px;
@@ -274,17 +340,51 @@ const Content1 = styled.div`
   .timeRange {
     margin-top: 60px;
 
+    p {
+      @media only screen and (max-width: 400px) {
+        /* display: block;
+        justify-content: center;
+        width: 100%; */
+        font-size: 15px;
+        text-align: center;
+      }
+    }
+
+    .toPPP {
+      @media only screen and (max-width: 400px) {
+        /* display: block;
+        justify-content: center;
+        width: 100%; */
+        display: none;
+      }
+    }
+
     .rangeContainer {
       display: flex;
       width: 360px;
       align-items: center;
       justify-content: space-between;
       margin-top: 20px;
+
+      @media only screen and (max-width: 400px) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        gap: 15px;
+      }
     }
   }
 
   .generateBtn {
     margin-top: 27px;
+
+    @media only screen and (max-width: 400px) {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      gap: 15px;
+    }
     img {
       cursor: pointer;
       width: 180px;
