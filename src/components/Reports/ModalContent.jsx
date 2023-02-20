@@ -65,7 +65,7 @@ const Content = styled.div`
   padding: 30px 20px;
   width: 400px;
   border-radius: 10px;
-  animation: slideDown 0.3s forwards;
+  animation: slideDown 0.3s ease-in forwards;
 
   h5 {
     font-size: 17px;
@@ -106,35 +106,17 @@ const Content = styled.div`
   }
   @keyframes slideDown {
     0% {
-      /* transform: translateX(-100px); */
       top: 0;
     }
-    5% {
-      top: 5%;
-    }
-    10% {
+
+    25% {
       top: 10%;
     }
-    25% {
-      top: 15%;
-    }
-    30% {
-      top: 20%;
-    }
-    40% {
+    50% {
       top: 30%;
     }
-    60% {
+    75% {
       top: 40%;
-    }
-    70% {
-      top: 50%;
-    }
-    80% {
-      top: 40%;
-    }
-    90% {
-      top: 45%;
     }
     100% {
       top: 50%;
@@ -152,7 +134,7 @@ const Content2 = styled.div`
   padding: 30px 20px;
   width: 400px;
   border-radius: 10px;
-  animation: slideDown 0.3s forwards;
+  animation: slideDown 0.3s ease-in forwards;
 
   h5 {
     font-size: 17px;
@@ -189,35 +171,16 @@ const Content2 = styled.div`
 
   @keyframes slideDown {
     0% {
-      /* transform: translateX(-100px); */
       top: 0;
     }
-    5% {
-      top: 5%;
-    }
-    10% {
+    25% {
       top: 10%;
     }
-    25% {
-      top: 15%;
-    }
-    30% {
-      top: 20%;
-    }
-    40% {
+    50% {
       top: 30%;
     }
-    60% {
+    75% {
       top: 40%;
-    }
-    70% {
-      top: 50%;
-    }
-    80% {
-      top: 40%;
-    }
-    90% {
-      top: 45%;
     }
     100% {
       top: 50%;
