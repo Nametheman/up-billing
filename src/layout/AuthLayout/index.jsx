@@ -44,7 +44,7 @@ const Container = styled.div`
   display: flex;
   height: 100vh;
 
-  @media only screen and (max-width: 400px) {
+  @media only screen and (max-width: 450px) {
     display: block;
     height: unset;
   }
@@ -58,7 +58,7 @@ const LeftContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-  @media only screen and (max-width: 400px) {
+  @media only screen and (max-width: 450px) {
     display: none;
     flex: 0;
   }
@@ -90,7 +90,7 @@ const RightContainer = styled.div`
   flex: 0.4;
   padding: 3em 9rem;
 
-  @media only screen and (max-width: 400px) {
+  @media only screen and (max-width: 450px) {
     flex: 1;
     width: 100%;
     padding: 10px 20px;

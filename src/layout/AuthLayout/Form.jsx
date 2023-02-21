@@ -84,7 +84,7 @@ const Container = styled.div`
     justify-content: center;
     margin-top: 1rem;
 
-    @media only screen and (max-width: 400px) {
+    @media only screen and (max-width: 450px) {
     }
     input {
       width: 96%;

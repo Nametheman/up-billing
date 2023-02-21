@@ -69,6 +69,32 @@ const Table = ({ data, showModal }) => {
 export default Table;
 
 const Container = styled.div`
+  @media screen and (max-width: 600px) {
+    table {
+      width: 100%;
+    }
+    thead {
+      display: none;
+    }
+    tr:nth-of-type(2n) {
+      background-color: inherit;
+    }
+    tr td:first-child {
+      background: #f0f0f0;
+      font-weight: bold;
+      font-size: 1.3em;
+    }
+    tbody td {
+      display: block;
+      text-align: center;
+    }
+    tbody td:before {
+      content: attr(data-th);
+      display: block;
+      text-align: center;
+    }
+  }
+
   table {
     text-align: left;
     border-collapse: collapse;

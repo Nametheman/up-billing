@@ -84,7 +84,7 @@ const Container = styled.div`
   height: 100vh;
   padding: 15px;
 
-  @media only screen and (max-width: 400px) {
+  @media only screen and (max-width: 450px) {
     display: none;
   }
 

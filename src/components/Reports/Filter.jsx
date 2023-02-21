@@ -82,6 +82,11 @@ const Cont = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 30px;
+
+  @media only screen and (max-width: 450px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
   .reportType {
     p {
       font-size: 14px;

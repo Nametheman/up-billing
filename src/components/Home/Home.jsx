@@ -149,7 +149,7 @@ export const HeadPane = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  @media only screen and (max-width: 400px) {
+  @media only screen and (max-width: 450px) {
     width: 100vw;
     gap: 10px;
     padding: 10px;
@@ -165,7 +165,7 @@ export const SearchBox = styled.div`
   border-radius: 6px;
   padding: 0 20px;
 
-  @media only screen and (max-width: 400px) {
+  @media only screen and (max-width: 450px) {
     width: 300px;
   }
 
@@ -176,7 +176,7 @@ export const SearchBox = styled.div`
     outline: none;
     padding: 0 10px;
 
-    @media only screen and (max-width: 400px) {
+    @media only screen and (max-width: 450px) {
       width: 99%;
     }
     &::placeholder {
@@ -192,11 +192,11 @@ const UserProfileWrapper = styled.div`
   gap: 9px;
   margin-right: 20px;
   position: relative;
-  @media only screen and (max-width: 400px) {
+  @media only screen and (max-width: 450px) {
     margin-right: 0;
   }
   .loggedUserInfo {
-    @media only screen and (max-width: 400px) {
+    @media only screen and (max-width: 450px) {
       display: none;
     }
   }
@@ -226,8 +226,12 @@ const UserProfileWrapper = styled.div`
 export const ContentWrapper = styled.div`
   padding: 20px 40px;
 
+  @media only screen and (max-width: 450px) {
+    padding: 10px 10px !important;
+  }
+
   h3 {
-    @media only screen and (max-width: 400px) {
+    @media only screen and (max-width: 450px) {
       text-align: center;
     }
   }
@@ -240,7 +244,7 @@ const Content1 = styled.div`
   border-radius: 10px;
   padding: 50px;
 
-  @media only screen and (max-width: 400px) {
+  @media only screen and (max-width: 450px) {
     /* display: block;
         justify-content: center;
         width: 100%; */
@@ -253,12 +257,12 @@ const Content1 = styled.div`
     position: relative;
     width: 370px;
 
-    @media only screen and (max-width: 400px) {
+    @media only screen and (max-width: 450px) {
       display: flex;
       justify-content: center;
       width: 200px;
       gap: 15px;
-      margin-left: 10%;
+      margin-left: 15%;
     }
 
     .searchReport {
@@ -285,7 +289,7 @@ const Content1 = styled.div`
       top: 50px;
       border-radius: 8px;
 
-      @media only screen and (max-width: 400px) {
+      @media only screen and (max-width: 450px) {
         /* display: block;
         justify-content: center;
         width: 100%; */
@@ -302,7 +306,7 @@ const Content1 = styled.div`
         p {
           color: #000000b2;
 
-          @media only screen and (max-width: 400px) {
+          @media only screen and (max-width: 450px) {
             /* display: block;
         justify-content: center;
         width: 100%; */
@@ -322,7 +326,7 @@ const Content1 = styled.div`
           color: #000;
           transition: all 0.3s ease-in-out;
 
-          @media only screen and (max-width: 400px) {
+          @media only screen and (max-width: 450px) {
             /* display: block;
         justify-content: center;
         width: 100%; */
@@ -341,7 +345,7 @@ const Content1 = styled.div`
     margin-top: 60px;
 
     p {
-      @media only screen and (max-width: 400px) {
+      @media only screen and (max-width: 450px) {
         /* display: block;
         justify-content: center;
         width: 100%; */
@@ -351,7 +355,7 @@ const Content1 = styled.div`
     }
 
     .toPPP {
-      @media only screen and (max-width: 400px) {
+      @media only screen and (max-width: 450px) {
         /* display: block;
         justify-content: center;
         width: 100%; */
@@ -366,7 +370,7 @@ const Content1 = styled.div`
       justify-content: space-between;
       margin-top: 20px;
 
-      @media only screen and (max-width: 400px) {
+      @media only screen and (max-width: 450px) {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -379,7 +383,7 @@ const Content1 = styled.div`
   .generateBtn {
     margin-top: 27px;
 
-    @media only screen and (max-width: 400px) {
+    @media only screen and (max-width: 450px) {
       display: flex;
       justify-content: center;
       width: 100%;

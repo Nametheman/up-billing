@@ -88,6 +88,10 @@ const TableWrapper = styled.div`
   background-color: #fff;
   border-radius: 13px;
   padding: 20px 0;
+
+  @media only screen and (max-width: 450px) {
+    /* padding: 20p; */
+  }
   margin-top: 30px;
 `;
 const PaginationWrapper = styled.div`
@@ -96,6 +100,10 @@ const PaginationWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media only screen and (max-width: 450px) {
+    /* padding: 0; */
+  }
 
   .count {
     font-size: 14px;
