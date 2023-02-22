@@ -27,12 +27,6 @@ const Login = () => {
         <p className="signIn">Sign in</p>
         <p>Welcome back! Please enter your details </p>
         <Form />
-        <a href="#" className="googleAuth">
-          <img src={googleLogo} alt="" /> <p>Sign in with Google</p>
-        </a>
-        <p className="createAcct">
-          Need an account? <a href="#">Create an account</a>{" "}
-        </p>
       </RightContainer>
     </Container>
   );
