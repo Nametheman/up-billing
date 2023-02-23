@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { GrSearch } from "react-icons/gr";
 import { BiLogOut } from "react-icons/bi";
@@ -10,24 +10,141 @@ import generateBtn from "../../assets/images/exportBtn.svg";
 import "react-datepicker/dist/react-datepicker.css";
 import Toast from "./Toast";
 import { Link } from "react-router-dom";
+import moment from "moment";
+import { useNavigate } from "react-router-dom";
+import { useSessionStorage } from "../../hooks/UseSessionStorage";
 
 const Home = () => {
+  const navigate = useNavigate();
+  const { getSessionStorage } = useSessionStorage("__appUser");
+  const token = getSessionStorage;
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
+  const formattedStartDate = moment(startDate).format("YYYY-MM-DD");
+  const formattedEndDate = moment(endDate).format("YYYY-MM-DD");
+
+  console.log(formattedStartDate, formattedEndDate);
   const [showSelectModal, setShowSelectModal] = useState(false);
   const [reportList, setReportList] = useState(false);
+  const [categoryList, setCategoryList] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [showLogout, setShowLogout] = useState(false);
 
+  const [serverData, setServerData] = useState(null);
+
+  const [reportFetched, setReportFetched] = useState(false);
+  const [fetchedReport, setFetchedReport] = useState(null);
+
+  const [categories, setCategories] = useState(null);
+
+  const [copiedCat, setCopiedCat] = useState(null);
+  const [copiedRep, setCopiedRep] = useState(null);
+
+  console.log(categories);
+
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedReport, setSelectedReport] = useState(null);
+
+  console.log(selectedCategory);
   const showSelectModalHandler = () => {
     setShowSelectModal(true);
   };
-  const reports = [
-    { title: "Report 1" },
-    { title: "Report 2" },
-    { title: "Report 3" },
-  ];
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  useEffect(() => {
+    getReport();
+    console.log(fetchedReport);
+  }, [selectedCategory]);
+  // const fetchUser =
+
+  const getUser = async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch(
+        "http://www.jonexy.somee.com/api/BiManager/GetReportCategories/",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      setServerData(data);
+      setCategories(data?.data);
+      setCopiedCat(data?.data);
+      console.log(data);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getReport = async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch(
+        `http://www.jonexy.somee.com/api/BiManager/GetReportsByCategory?category=${selectedCategory}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      setFetchedReport(data?.data);
+      setCopiedRep(data?.data);
+      console.log(data);
+      setIsLoading(false);
+      setReportFetched(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // const [filteredReport, setFilteredReport] = useState(fetchedReport);
+  // const [filteredCategory, setFilteredCategory] = useState(serverData?.data);
+
+  const handleReportFilterChange = (event) => {
+    const filterValue = event.target.value.toLowerCase();
+    const filteredReport = fetchedReport?.filter((report) =>
+      report.toLowerCase().includes(filterValue)
+    );
+
+    if (filterValue.length < 1) {
+      setFetchedReport(copiedRep);
+    } else {
+      setFetchedReport(filteredReport);
+    }
+    console.log(filteredReport);
+  };
+  const handleCategoryFilterChange = (event) => {
+    const filterValue = event.target.value.toLowerCase();
+    const filteredCategory = categories?.filter((category) =>
+      category.toLowerCase().includes(filterValue)
+    );
+
+    if (filterValue.length < 1) {
+      setCategories(copiedCat);
+    } else {
+      setCategories(filteredCategory);
+    }
+    console.log(filteredCategory);
+  };
+
+  const { removeSessionStorage } = useSessionStorage("__appuser");
+
+  const logoutHandler = () => {
+    removeSessionStorage();
+    navigate("/");
+  };
+
   return (
     <Container>
       <HeadPane>
@@ -55,8 +172,8 @@ const Home = () => {
           </div>
           <FaCaretDown size={13} />
           {showLogout && (
-            <div className="logout">
-              <Link to="/login">
+            <div className="logout" onClick={logoutHandler}>
+              <Link to="#">
                 <BiLogOut />
                 <p>Logout</p>
               </Link>
@@ -67,40 +184,122 @@ const Home = () => {
       <ContentWrapper>
         <h3>UP BILLING REPORT</h3>
         <Content1>
-          <div>
-            <p>Select range to generate your Billing Report</p>
-            <div className="idktbh">
-              <div
-                className="searchReport"
-                onClick={() => {
-                  setReportList(!reportList);
-                }}
-              >
-                <p style={{ color: "#00000080", fontSize: "13px" }}>
-                  Select Report
-                </p>
-                <FaCaretDown size={13} />
-              </div>
-              {reportList && (
-                <div className="selectReports">
-                  <div className="selectRptHead">
-                    <p>Select report to run</p>{" "}
-                    <FaCaretUp
-                      size={16}
-                      style={{ cursor: "pointer" }}
-                      onClick={() => {
-                        setReportList(false);
-                      }}
-                    />
-                  </div>
-
-                  <div className="reportList">
-                    {reports.map((report) => {
-                      return <a href="#">{report.title}</a>;
-                    })}
-                  </div>
+          <div style={{ display: "flex", alignItems: "center", gap: "30px" }}>
+            <div>
+              <p>Select report category</p>
+              <div className="idktbh">
+                <div
+                  className="searchReport"
+                  onClick={() => {
+                    setCategoryList(!categoryList);
+                  }}
+                >
+                  <p style={{ color: "#00000080", fontSize: "13px" }}>
+                    {selectedCategory === null
+                      ? "Select category"
+                      : selectedCategory}
+                  </p>
+                  <FaCaretDown size={13} />
                 </div>
-              )}
+                {categoryList && (
+                  <div className="selectReports">
+                    <div className="selectRptHead">
+                      <p>Select category to run</p>
+                      <FaCaretUp
+                        size={16}
+                        style={{ cursor: "pointer" }}
+                        onClick={() => {
+                          setCategoryList(false);
+                        }}
+                      />
+                    </div>
+
+                    <div className="reportList">
+                      <input
+                        type="text"
+                        placeholder="search by keyword"
+                        onChange={handleCategoryFilterChange}
+                        className="searchInput"
+                      />
+                      {categories?.map((report) => {
+                        return (
+                          <button
+                            onClick={(e) => {
+                              setSelectedCategory(report);
+                              setCategoryList(false);
+                            }}
+                          >
+                            {report}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+            <div>
+              <p>Select range to generate your billing report</p>
+              <div className="idktbh">
+                <div
+                  className="searchReport"
+                  style={{
+                    cursor: `${
+                      selectedCategory === null || reportFetched === false
+                        ? "not-allowed"
+                        : ""
+                    }`,
+                  }}
+                  onClick={() => {
+                    if (selectedCategory === null || reportFetched === false) {
+                      return;
+                    } else {
+                      setReportList(!reportList);
+                    }
+                  }}
+                >
+                  <p style={{ color: "#00000080", fontSize: "13px" }}>
+                    {selectedReport === null ? "Select report" : selectedReport}
+                  </p>
+                  <FaCaretDown size={13} />
+                </div>
+                {reportList && (
+                  <div className="selectReports">
+                    <div className="selectRptHead">
+                      <p>Select report to run</p>
+                      <FaCaretUp
+                        size={16}
+                        style={{ cursor: "pointer" }}
+                        onClick={() => {
+                          setReportList(false);
+                        }}
+                      />
+                    </div>
+
+                    <div className="reportList">
+                      <input
+                        type="text"
+                        placeholder="search by keyword"
+                        onChange={handleReportFilterChange}
+                        className="searchInput"
+                      />
+                      {fetchedReport?.map((report) => {
+                        return (
+                          <button
+                            href="#"
+                            onClick={() => {
+                              setSelectedReport(report);
+                              setReportList(false);
+                            }}
+                          >
+                            {report}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
@@ -319,12 +518,18 @@ const Content1 = styled.div`
         display: flex;
         flex-direction: column;
         margin-top: 10px;
-        a {
+        max-height: 160px;
+        overflow-y: scroll;
+        button {
           margin-bottom: 10px;
           padding: 10px;
           text-decoration: none;
           color: #000;
           transition: all 0.3s ease-in-out;
+          outline: none;
+          border: none;
+          text-align: left;
+          background-color: transparent;
 
           @media only screen and (max-width: 450px) {
             /* display: block;
@@ -337,6 +542,14 @@ const Content1 = styled.div`
             background-color: #fff0d2;
             border-radius: 8px;
           }
+        }
+
+        .searchInput {
+          padding: 10px;
+          margin: 10px 0;
+          border-radius: 8px;
+          outline: none;
+          border: 1px solid #0000001a;
         }
       }
     }
